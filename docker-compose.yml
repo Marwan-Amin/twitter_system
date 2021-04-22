@@ -1,0 +1,52 @@
+version: "3.4"
+
+networks:
+  twitter:
+
+services:
+  twitter_app:
+    build: .
+    container_name: twitter_app
+    working_dir: /var/www/html/
+    command: "php artisan serve --host=0.0.0.0 --port=5000"
+    depends_on:
+      - twitter_database
+    volumes:
+      - ./twitter/:/var/www/html/
+    ports:
+      - "5000:5000"
+    stdin_open: true
+    tty: true
+    networks:
+      - twitter
+
+  twitter_database:
+    image: mysql:latest
+    command:
+      - --innodb_buffer_pool_size=10M
+      - --innodb_use_native_aio=0
+    container_name: twitter_database
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_DATABASE: twitter
+    ports:
+      - "5001:3306"
+    networks:
+      - twitter
+    restart: always
+    volumes:
+      - ./twitter_database/:/var/lib/mysql
+
+  twitter_phpmyadmin:
+    image: phpmyadmin:latest
+    restart: always
+    container_name: twitter_phpmyadmin
+    depends_on:
+      - twitter_database
+    ports:
+      - "5002:80"
+    environment:
+      PMA_HOST: twitter_database
+      MYSQL_ROOT_PASSWORD: secret
+    networks:
+      - twitter
