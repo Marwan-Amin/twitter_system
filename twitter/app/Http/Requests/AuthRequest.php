@@ -30,7 +30,7 @@ class AuthRequest extends FormRequest
                 'name' => 'required|string',
                 'email' => 'required|email|unique:users,email',
                 'password' => 'required|string|confirmed|min:6',
-                'date_of_birth' => 'required|date|date_format:d-m-Y',
+                'date_of_birth' => 'required|date|date_format:Y-m-d',
                 'image' => 'required|image|mimes:jpeg,png,jpg|max:2048'
             ];
         }
