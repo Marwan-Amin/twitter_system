@@ -49,4 +49,9 @@ class User extends Authenticatable
     {
         $this->attributes['password'] = bcrypt($password);
     }
+
+    public function tweets()
+    {
+        return $this->hasMany(Tweet::class);
+    }
 }
