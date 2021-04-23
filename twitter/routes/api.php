@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\TweetController;
+use App\Http\Controllers\Api\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -21,4 +22,6 @@ Route::post('login', [AuthController::class, 'login'])->middleware('throttle:log
 
 Route::middleware(['auth:api'])->group(function () {
     Route::post('/tweet', [TweetController::class, 'create']);
+
+    Route::post('/user/follow', [UserController::class, 'follow']);
 });
