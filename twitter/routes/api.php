@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\ReportController;
 use App\Http\Controllers\Api\TweetController;
 use App\Http\Controllers\Api\UserController;
 use Illuminate\Http\Request;
@@ -24,4 +25,6 @@ Route::middleware(['auth:api'])->group(function () {
     Route::post('/tweet', [TweetController::class, 'create']);
 
     Route::post('/user/follow', [UserController::class, 'follow']);
+
+    Route::get('/report', [ReportController::class, 'generateReport']);
 });
