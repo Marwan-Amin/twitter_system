@@ -26,7 +26,6 @@ class TweetRequest extends FormRequest
     public function rules()
     {
         return [
-            'user_id' => 'required|integer|min:1|exists:users,id',
             'tweet' => 'required|string|min:5|max:140',
         ];
     }

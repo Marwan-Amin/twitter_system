@@ -6,20 +6,20 @@ use App\Helpers\ApiResponse;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\TweetRequest;
 use App\Http\Resources\Tweet\TweetResource;
-use App\Repositories\Tweet\TweetRepositoryInterface;
+use App\Services\TweetService;
 use Illuminate\Http\Request;
 
 class TweetController extends Controller
 {
-    public function __construct(TweetRepositoryInterface $tweet, ApiResponse $apiResponse)
+    public function __construct(TweetService $tweetService, ApiResponse $apiResponse)
     {
         $this->apiResponse = $apiResponse;
-        $this->tweet = $tweet;
+        $this->tweetService = $tweetService;
     }
 
     public function create(TweetRequest $request)
     {
-        $tweet = $this->tweet->create($request->validated());
+        $tweet = $this->tweetService->create($request->validated());
         return $this->apiResponse->setSuccess(__('tweet.created'))->setData(new TweetResource($tweet))->returnJson();
     }
 }

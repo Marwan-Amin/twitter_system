@@ -2,22 +2,22 @@
 
 namespace App\Services;
 
+use App\Models\Tweet;
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
 
 class ReportService
 {
     public function generateReport()
     {
-        $users = User::withCount(['tweets'])->get();
-
         $report = [];
-        foreach ($users as $user) {
-            $report[] = [
-                'id' => $user->id,
-                'name' => $user->name,
-                'tweets_no' => $user->tweets_count
-            ];
-        }
+        Tweet::chunk(200, function ($tweets) {
+            foreach ($tweets as $tweet) {
+                $report[] = [
+                    'tweet' => $tweet->id
+                ];
+            }
+        });
 
         return $report;
     }

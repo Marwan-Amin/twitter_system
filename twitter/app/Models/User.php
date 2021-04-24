@@ -22,7 +22,10 @@ class User extends Authenticatable
         'email',
         'password',
         'image',
-        'date_of_birth'
+        'date_of_birth',
+        'number_of_followers',
+        'number_of_following',
+        'number_of_tweets'
     ];
 
     /**
@@ -53,5 +56,23 @@ class User extends Authenticatable
     public function tweets()
     {
         return $this->hasMany(Tweet::class);
+    }
+
+    public function incrementTweets()
+    {
+        $this->number_of_tweets = $this->number_of_tweets + 1;
+        $this->save();
+    }
+
+    public function incrementFollowers()
+    {
+        $this->number_of_followers = $this->number_of_followers + 1;
+        $this->save();
+    }
+
+    public function incrementFollowing()
+    {
+        $this->number_of_following = $this->number_of_following + 1;
+        $this->save();
     }
 }
