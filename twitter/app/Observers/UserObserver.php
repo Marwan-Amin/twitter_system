@@ -15,9 +15,9 @@ class UserObserver
      */
     public function created(User $user)
     {
-        // $path = Storage::putFileAs('images/' . $user->id, $user->image, 'profile' . '.' . $user->image->extension());
-        // $user->image = $path;
-        // $user->save();
+        $path = Storage::putFileAs('images/' . $user->id, $user->image, 'profile' . '.' . $user->image->extension());
+        $user->image = $path;
+        $user->save();
     }
 
     /**
