@@ -23,7 +23,9 @@ class TweetFactory extends Factory
     {
         return [
             'user_id' => $this->faker->numberBetween(1, 1000),
-            'tweet' => $this->faker->text(140)
+            'tweet' => $this->faker->text(140),
+            'created_at' => $this->faker->dateTimeBetween($startDate = '-5 years', $endDate = 'now'),
+            'updated_at' => $this->faker->dateTimeBetween($startDate = '-5 years', $endDate = 'now'),
         ];
     }
 }

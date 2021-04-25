@@ -21,9 +21,9 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string('image')->nullable();
             $table->date('date_of_birth');
-            $table->bigInteger('tweets')->default(0);
-            $table->bigInteger('followers')->default(0);
-            $table->bigInteger('following')->default(0);
+            $table->bigInteger('number_of_tweets')->default(0);
+            $table->bigInteger('number_of_followers')->default(0);
+            $table->bigInteger('number_of_following')->default(0);
             $table->rememberToken();
             $table->timestamps();
         });

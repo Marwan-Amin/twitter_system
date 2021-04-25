@@ -17,7 +17,7 @@ class ReportController extends Controller
 
     public function generateReport()
     {
-        $report = $this->service->generateReport();
+        $report = $this->service->generateReportPDF();
         return $this->apiResponse->setSuccess(__('report.generated_success'))->setData($report)->returnJson();
     }
 }

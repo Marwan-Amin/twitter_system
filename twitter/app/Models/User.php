@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -47,6 +48,7 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    protected $with = ['tweets'];
 
     public function setPasswordAttribute($password)
     {
@@ -74,5 +76,17 @@ class User extends Authenticatable
     {
         $this->number_of_following = $this->number_of_following + 1;
         $this->save();
+    }
+
+    public function averageTweets($countTweets)
+    {
+        if (count($this->tweets) == 0) {
+            return 0;
+        }
+        $numberOfDays = Carbon::parse($this->tweets[0]->created_at)->diffInDays();
+        if ($numberOfDays == 0) {
+            return 0;
+        }
+        return $countTweets / $numberOfDays;
     }
 }

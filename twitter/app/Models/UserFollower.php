@@ -14,6 +14,10 @@ class UserFollower extends Model
         'follower_id',
     ];
 
+    protected $with = [
+        'user', 'following'
+    ];
+
     public function user()
     {
         return $this->belongsTo(User::class, 'follower_id');

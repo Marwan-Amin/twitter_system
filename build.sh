@@ -30,6 +30,7 @@ docker exec -it twitter_app composer dump-autoload
 docker exec -it twitter_app php artisan key:generate
 docker exec -it twitter_app php artisan migrate:fresh --seed
 docker exec -it twitter_app php artisan passport:install --force
+docker exec -it twitter_app php artisan storage:link
 # docker exec -it twitter_app php artisan config:cache
 # docker exec -it twitter_app php artisan route:cache
 #### END Configuring (twitter_app) microservice ----------------------
